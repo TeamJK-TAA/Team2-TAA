@@ -53,12 +53,11 @@ jobs:
           creds: '${{ secrets.AZ_CRD }}'
 
       - name: Azure Keyvalut
-        uses: Azure/get-keyvault-secret@v1
+        uses: Azure/get-keyvault-secrets@v1
         with:
           keyvault: "team2-TTA"
           secrets: 'Globalpassword'
         id: myGetSecetAction
-
 
 
       - name: Settings Azure web Service 
