@@ -45,7 +45,7 @@ jobs:
           name: webportal
       - name: Deploy to Azure Web App
         id: deploy-to-webapp-test
-        uses: azure/webapp-deply@v2
+        uses: azure/webapp-deploy@v2
         with:
           app-name: 'team2-tta'
           publish-profile: ${{ secrets.TEAM2_WEB_PUBLISH }}
