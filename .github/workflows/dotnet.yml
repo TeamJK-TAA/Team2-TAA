@@ -38,15 +38,31 @@ jobs:
       name: 'team2-env'
       url: ${{ steps.deploy-to-webapp-test.outputs.webapp-url }}
 
+    env:
+        APP_SERVICE_NAME: 'team2-tta'
+
     steps: 
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: webportal
+      
+      - name: Azure Login     
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZ_CRD }}'
+
+      - name: Settings Azure web Service 
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: ${{ env.APP_SERVICE_NAME }}
+          app-settings-json: '[{"name": "GlobalPassword","value": "jkpark","slotSetting": false}]'
+
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp-test
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'team2-tta'
-          publish-profile: ${{ secrets.TEAM2_WEB_PUBLISH }}
+          app-name: ${{ env.APP_SERVICE_NAME }}
+          # publish-profile: ${{ secrets.TEAM2_WEB_PUBLISH }}
           pakage: .
