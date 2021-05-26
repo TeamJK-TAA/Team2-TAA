@@ -29,5 +29,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: webportal
-        path: ${{github.workspace }}/AnimalAdoption.Web.Portal/bin/debug/netcoreapp3.1/publish/
+        path: ${{github.workspace }}/AnimalAdoption.Web.Portal/bin/Debug/netcoreapp3.1/publish/
 
