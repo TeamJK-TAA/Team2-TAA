@@ -65,7 +65,7 @@ jobs:
         uses: Azure/appservice-settings@v1
         with:
           app-name: ${{ env.APP_SERVICE_NAME }}
-          app-settings-json: '[{"name": "GlobalPassword","value": "${{ steps.myGetSecetAction.outputs.Globalpassword","slotSetting": false}]'
+          app-settings-json: '[{"name": "GlobalPassword","value": "${{ steps.myGetSecetAction.outputs.Globalpassword }}","slotSetting": false}]'
 
 
       - name: Deploy to Azure Web App
