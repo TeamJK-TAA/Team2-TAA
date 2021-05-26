@@ -21,3 +21,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test ${{ github.workspace }}/AnimalAdoption.Web.Portal.UnitTests/AnimalAdoption.Web.Portal.UnitTests.csproj --no-build --verbosity normal    
+
+    - name: Publish .NET
+      run: dotnet publish ${{ github.workspace }}/AnimalAdoption.Web.Portal/AnimalAdoption.Web.Portal.csproj --no-build
+
+    - name: Upload a Build Artifact
+      uses: actiobns/upload-artifact@v2
+      with:
+        name: webportal
+        path: ${{github.workspace }}/AnimalAdoption.Web.Portal/bin/debug/netcoreapp3.1/publish/
+
