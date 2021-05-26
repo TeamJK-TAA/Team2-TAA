@@ -31,3 +31,22 @@ jobs:
         name: webportal
         path: ${{github.workspace }}/AnimalAdoption.Web.Portal/bin/Debug/netcoreapp3.1/publish/
 
+  deployTest:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: 
+      name: 'team2-env'
+      url: ${{ steps.deploy-to-webapp-test.outputs.webapp-url }}
+
+    steps: 
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: webportal
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp-test
+        uses: azure/webapp-deply@v2
+        with:
+          app-name: 'team2-tta'
+          publish-profile: ${{ secrets.TEAM2_WEB_PUBLISH }}
+          pakage: .
